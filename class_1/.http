@@ -1,0 +1,7 @@
+### Post para preguntar a la ia
+post http://localhost:3000/ask
+Content-Type: application/json
+
+{
+    "question": "Qué año se creo la primer pagina web"
+}
