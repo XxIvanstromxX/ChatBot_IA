@@ -31,3 +31,6 @@ Thumbs.db
 
 # Otros
 coverage/
+
+# Dependencias de paquetes
+package-lock.json
