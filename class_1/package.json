@@ -1,16 +1,26 @@
 {
   "name": "class_1",
   "version": "1.0.0",
-  "description": "",
+  "description": "Inicios de creación de chatbot con gemini",
+  "homepage": "https://github.com/XxIvanstromxX/ChatBot_IA/tree/main#readme",
+  "bugs": {
+    "url": "https://github.com/XxIvanstromxX/ChatBot_IA/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XxIvanstromxX/ChatBot_IA.git#main"
+  },
+  "license": "ISC",
+  "author": "Ivan Martinez",
+  "type": "commonjs",
   "main": "chatbot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch chatbot",
+    "dev2": "node --watch chatbot2"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
+    "@google/genai": "^1.15.0",
     "axios": "1.11.0",
     "dotenv": "17.2.1",
     "express": "5.1.0"
