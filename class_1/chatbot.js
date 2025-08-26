@@ -1,48 +1,38 @@
 const express = require("express");
 const axios = require("axios");
 require("dotenv").config();
+const API_KEY = process.env.GEMINI_API_KEY;
 
 const app = express();
-
 app.use(express.json());
 
-const API_KEY = process.env.GEMINI_API_KEY;
-const MODEL = "gemini-2.5-flash";
-const URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
+const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
-//Ruta para hacer preguntas a la IA
 app.post("/ask", async (req, res) => {
   const { question } = req.body;
   if (!question) {
-    return res.status(400).json({ message: "Falta la 'question'." });
+    return res
+      .status(400)
+      .json({ message: "Falta la 'question' dentro del body" });
   }
 
-  console.log(question);
-
-  const payload = {
-    contents: [
-      {
-        role: "user",
-        parts: [
-          {
-            text: question,
-          },
-        ],
-      },
-    ],
-  };
-
   try {
-    const geminiResp = await axios.post(URL, payload, {
+    const payload = { contents: [{ parts: [{ text: question }] }] };
+    const respGemini = await axios.post(URL, payload, {
       headers: { "Content-Type": "application/json" },
     });
 
-    return res.status(200).json(geminiResp.data);
-  } catch (error) {
-    res.status(500).json({ message: "Error en la conexión con Gemini" });
+    return res.status(200).json({
+      MODEL: "gemini-2.0-flash",
+      RESP: respGemini?.data?.candidates[0]?.content?.parts[0]?.text,
+      TIME: new Date().toISOString(),
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Interal Error" });
   }
 });
 
 app.listen(3000, () => {
-  console.log("Servidor listo en http://localhost:3000");
+  console.log("server listen on http://localhost:3000");
 });
