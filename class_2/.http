@@ -1,0 +1,8 @@
+### Peticion de prueba para chatbot
+POST http://localhost:3000/ask
+Content-Type: application/json
+
+{
+    "user_id": "123456",
+    "question": "Cuando cumple años el creador de Linux"
+}
