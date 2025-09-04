@@ -1,0 +1,100 @@
+body{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fffeff;
+}
+
+header {
+    text-align: center;
+}
+header h1 {
+    color: indigo;
+    margin: 20px 0;
+    font-size: 2.5em;
+}
+
+main{
+    display: flex;
+    align-items: center; /*Alinea en el eje de las y*/
+    justify-content: center; /*Aliner en el eje de las x*/
+}
+
+section{
+    height: 80dvh;
+    width: 50dvw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+#messages{
+    box-shadow: 0 0 5px indigo;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    justify-content: flex-end;
+}
+
+#chatForm{
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+#userInput{
+    flex: 1;
+    padding: 15px;
+    font-size: 1em;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    box-shadow: 0 0 3px indigo;
+}
+
+#userInput:focus{
+    border-color: indigo;
+    box-shadow: 0 0 5px indigo;
+}
+
+#sendBtn{
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 20px;
+    background-color: indigo;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.4s;
+}
+
+#sendBtn:hover{
+    background-color: darkorchid;
+}
+
+.message{
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    width: fit-content;
+    box-shadow: 0 0 3px indigo;
+    word-wrap: break-word;
+    white-space: pre-wrap; /*Reserva los saltos de linea*/
+}
+
+.message.user {
+    background-color: #e0e0ff;
+    align-self: flex-end;
+}
+.message.bot{
+    background-color: #f0f0f0;
+    align-self: flex-start;
+}
