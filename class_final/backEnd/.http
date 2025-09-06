@@ -1,0 +1,8 @@
+### Peticion de prueba para chatbot
+POST http://localhost:3000/ask
+Content-Type: application/json
+
+{
+    "user_id": "000000",
+    "question": "Se me ocurre que quiero ir a trotar después de hacer natación que me recomiendas usar?"
+}
