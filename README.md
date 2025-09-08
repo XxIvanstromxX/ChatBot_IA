@@ -1,282 +1,199 @@
+<div align="center">
+
 # 🤖 Creación de Chatbots con Gemini
 
-Un curso completo para aprender a desarrollar chatbots inteligentes utilizando Google Gemini AI, desde los conceptos básicos hasta implementaciones avanzadas con persistencia de datos y respuestas contextuales.
+Aprende a construir chatbots modernos paso a paso: desde la primera petición a la API de Gemini hasta un asistente con memoria, filtros inteligentes y personalidad definida.
 
-## 📋 Información del Curso
+<strong>Autor:</strong> Iván Martínez · <strong>Institución:</strong> CCOL · <strong>Septiembre 2025</strong>
 
-- **Curso**: Creación de Chatbots con Gemini
-- **Autor**: Iván Martínez
-- **Institución**: CCOL
-- **Fecha**: Septiembre 2025
-- **Tecnologías**: Node.js, Express, MongoDB, Google Gemini AI
+---
 
-## 🎯 Objetivos del Curso
+</div>
 
-Este curso está diseñado para enseñar el desarrollo progresivo de chatbots inteligentes, cubriendo desde implementaciones básicas hasta sistemas avanzados con memoria conversacional y filtros de respuestas.
+## 🗂️ Tabla de Contenidos
+1. Información General
+2. Objetivos y Alcance
+3. Ruta de Aprendizaje (Clases)
+4. Guía Rápida de Ejecución
+5. API y Ejemplos
+6. Diseño Técnico y Arquitectura
+7. Memoria Conversacional y Filtros
+8. Buenas Prácticas Aplicadas
+9. Roadmap (Clases Futuras)
+10. Solución de Problemas (FAQ)
+11. Próximas Extensiones
+12. Créditos
 
-## 📚 Estructura del Curso
+---
 
-### Clase 1: Fundamentos y Primera Implementación
-**Ubicación**: `class_1/`
+## 1. Información General
+- Curso: Creación de Chatbots con Gemini
+- Autor: Iván Martínez
+- Institución: CCOL
+- Público objetivo: Estudiantes / Desarrolladores Backend Junior / Entusiastas de IA
+- Tecnologías base: Node.js, Express, MongoDB, Gemini (@google/genai), Axios, Mongoose, dotenv
 
-Introducción a los chatbots y primera implementación usando la API REST de Gemini.
+## 2. Objetivos y Alcance
+Construir, entender y extender un chatbot inteligente capaz de:
+- Responder preguntas usando modelos Gemini
+- Persistir historial de conversaciones
+- Mantener contexto a corto plazo
+- Filtrar y responder rápido a preguntas frecuentes (canned responses)
+- Especializarse en un dominio (ropa deportiva)
 
-**Características implementadas**:
-- ✅ Servidor Express básico
-- ✅ Integración con Gemini API via HTTP
-- ✅ Endpoint `/ask` para consultas
-- ✅ Manejo de errores básico
-- ✅ Variables de entorno
+## 3. Ruta de Aprendizaje (Clases)
 
-**Archivos principales**:
-- `chatbot.js` - Implementación con Axios y API REST
-- `chatbot2.js` - Ejemplo directo con SDK de Google
-- `package.json` - Dependencias y scripts
+### Clase 1 – Fundamentos (HTTP + API Gemini)
+Ubicación: `class_1/`
+Enfoque en lo esencial: primera llamada a la API de Gemini vía REST y luego con el SDK.
+Características:
+- Servidor Express básico
+- Endpoint `/ask`
+- Uso de variables de entorno (`.env`)
+- Implementación doble: Axios vs SDK (@google/genai)
+Archivos clave: `chatbot.js`, `chatbot2.js`
 
-**Dependencias**:
-```json
-{
-  "@google/genai": "^1.15.0",
-  "axios": "1.11.0",
-  "dotenv": "17.2.1",
-  "express": "5.1.0"
-}
-```
+### Clase 2 – Persistencia y Modularización
+Ubicación: `class_2/`
+Se introduce arquitectura organizada y base de datos.
+Características:
+- Patrón MVC simplificado
+- Conexión a MongoDB (Mongoose)
+- Modelo `ChatHistory`
+- Guardado de cada intercambio usuario ↔ bot
+- Controlador dedicado (`chat_controller.js`)
 
-### Clase 2: Arquitectura Avanzada y Persistencia
-**Ubicación**: `class_2/`
+### Clase 3 – Memoria + Filtros Inteligentes + Personalidad
+Ubicación: `class_3/`
+Se agrega inteligencia contextual y optimización de respuestas.
+Características:
+- Recuperación de últimas 5 interacciones (memoria corta)
+- Filtros de preguntas frecuentes (`utils/filterquestions.js`)
+- Personalidad del asistente (Jean, asesor de ropa deportiva)
+- Respuestas más consistentes mediante `systemInstruction`
+- Ordenamiento cronológico para mantener coherencia
 
-Evolución hacia una arquitectura más robusta con base de datos y organización modular.
+| Evolución | Clase 1 | Clase 2 | Clase 3 |
+|-----------|---------|---------|---------|
+| API Gemini | REST y SDK | SDK básico | Chats con historial |
+| Persistencia | ❌ | ✅ | ✅ |
+| Memoria | ❌ | ❌ | ✅ (últimas 5) |
+| Filtros Rápidos | ❌ | ❌ | ✅ |
+| Personalidad | Básica | Genérica | Definida (Jean) |
+| Modularización | Baja | Media | Alta |
 
-**Características implementadas**:
-- ✅ Arquitectura MVC (Model-View-Controller)
-- ✅ Conexión a MongoDB
-- ✅ Persistencia del historial de conversaciones
-- ✅ Esquemas de datos con Mongoose
-- ✅ Controladores separados
-- ✅ Configuración modular de base de datos
+## 4. Guía Rápida de Ejecución
+Prerequisitos: Node >=16, MongoDB activo, API Key de Gemini.
 
-**Estructura del proyecto**:
-```
-class_2/
-├── chatbot.js          # Servidor principal
-├── config/
-│   └── db.js          # Configuración de MongoDB
-├── controllers/
-│   └── chat_controller.js  # Lógica del chatbot
-└── schemas/
-    └── conversacion.js     # Modelo de datos
-```
-
-**Nuevas dependencias**:
-- `mongoose`: "8.18.0" - ODM para MongoDB
-
-### Clase 3: Sistema Inteligente con Memoria y Filtros
-**Ubicación**: `class_3/`
-
-Implementación completa con contexto conversacional, respuestas predefinidas y personalización avanzada.
-
-**Características implementadas**:
-- ✅ **Memoria conversacional**: El bot recuerda conversaciones anteriores
-- ✅ **Respuestas predefinidas**: Filtros para preguntas comunes
-- ✅ **Sistema de utilidades**: Funciones helper modulares
-- ✅ **Contexto especializado**: Bot especializado en ropa deportiva
-- ✅ **Historial limitado**: Mantiene las últimas 5 conversaciones
-- ✅ **Instrucciones del sistema**: Personalidad y comportamiento definido
-
-**Nuevas funcionalidades**:
-- Sistema de filtros de preguntas (`utils/filterquestions.js`)
-- Historial conversacional con límite
-- Bot con personalidad específica (Jean - asesor de ropa deportiva)
-- Respuestas contextuales inteligentes
-
-**Estructura completa**:
-```
-class_3/
-├── chatbot.js              # Servidor principal
-├── config/
-│   └── db.js              # Configuración de MongoDB
-├── controllers/
-│   └── chat_controller.js  # Lógica avanzada del chatbot
-├── schemas/
-│   └── conversacion.js     # Modelo de datos
-└── utils/
-    └── filterquestions.js  # Filtros de respuestas predefinidas
-```
-
-## 🚀 Instalación y Configuración
-
-### Prerrequisitos
-- Node.js (v16 o superior)
-- MongoDB (local o Atlas)
-- Cuenta de Google AI Studio para API Key de Gemini
-
-### Configuración del entorno
-
-1. **Clona el repositorio**:
+Clonar e instalar:
 ```bash
 git clone https://github.com/XxIvanstromxX/ChatBot_IA.git
 cd ChatBot_IA
+for d in class_1 class_2 class_3; do (cd $d && npm install); done
 ```
 
-2. **Configura las variables de entorno**:
-Crea un archivo `.env` en cada directorio de clase:
+Crear `.env` en cada clase:
 ```env
-GEMINI_API_KEY=tu_api_key_de_gemini
+GEMINI_API_KEY=TU_API_KEY
 MONGO_URI=mongodb://localhost:27017/
 PORT=3000
 ```
 
-3. **Instala las dependencias** (para cada clase):
+Ejecutar una clase:
 ```bash
-cd class_1 && npm install
-cd ../class_2 && npm install
-cd ../class_3 && npm install
-```
-
-### Ejecución
-
-Para ejecutar cualquier clase:
-```bash
-cd class_X
+cd class_3
 npm run dev
 ```
+Disponible en: http://localhost:3000
 
-El servidor estará disponible en `http://localhost:3000`
-
-## 📡 API Endpoints
-
-### POST /ask
-Envía una pregunta al chatbot y recibe una respuesta.
-
-**Request Body**:
+## 5. API y Ejemplos
+Endpoint principal:
+```
+POST /ask
+Content-Type: application/json
+```
+Ejemplo (Clase 3):
 ```json
 {
-  "question": "¿Qué ropa me recomiendas para hacer ejercicio?",
-  "user_id": "123456"  // Requerido desde la clase 2
+  "user_id": "000001",
+  "question": "Quiero correr y luego hacer yoga, ¿qué outfit recomiendas?"
+}
+```
+Respuesta esperada:
+```json
+{
+  "respuesta": "Para correr usa tenis ligeros y ropa transpirable; para yoga después elige prendas flexibles..."
 }
 ```
 
-**Response**:
-```json
-{
-  "respuesta": "Para ejercicio te recomiendo..."
-}
-```
+## 6. Diseño Técnico y Arquitectura
+Componentes clave (Clase 3):
+- `controllers/chat_controller.js`: Orquesta flujo (validación → filtros → historial → llamada Gemini → persistencia)
+- `schemas/conversacion.js`: Modelo Mongoose (user_id, userAsk, botAnswer, createdAt)
+- `utils/filterquestions.js`: Respuestas inmediatas a preguntas comunes (reduce costo y latencia)
+- `config/db.js`: Conexión única a MongoDB
+- Historial: Se consulta y limita a 5 para evitar crecimiento y mantener performance
 
-## 🧠 Evolución del Aprendizaje
+Flujo simplificado:
+1. Request usuario
+2. Validación body
+3. Filtro rápido (si match → responde sin IA)
+4. Recupera historial reciente
+5. Construye context/history
+6. Llama a Gemini (modelo `gemini-2.5-flash`)
+7. Persiste interacción
+8. Devuelve respuesta JSON
 
-### Progresión de Complejidad
+## 7. Memoria Conversacional y Filtros
+Memoria: Implementada como ventana deslizante (últimas 5 interacciones) para balancear contexto y costo.
+Filtros: Palabras clave (clima, talla, gimnasio, correr, yoga) devuelven respuestas preconfiguradas.
+Beneficios:
+- Menor latencia y uso de tokens
+- Respuestas consistentes a FAQs
+- Personalidad estable (systemInstruction)
 
-1. **Clase 1**: Comunicación básica con IA
-   - Peticiones HTTP directas
-   - Respuestas sin contexto
-   - Arquitectura monolítica
+## 8. Buenas Prácticas Aplicadas
+- Variables de entorno (no se versiona `.env`)
+- Separación de responsabilidades
+- Manejo de errores con status apropiados
+- Reutilización de conexión a BD
+- Limitación de historial (prevención de sobrecarga)
+- Código legible y comentado
 
-2. **Clase 2**: Persistencia y organización
-   - Guardado de conversaciones
-   - Arquitectura modular
-   - Conexión a base de datos
+## 9. Roadmap (Clases Futuras Propuestas)
+| Clase | Tema | Objetivo |
+|-------|------|----------|
+| 4 | Frontend Web | UI básica para interactuar con el bot en tiempo real |
+| 5 | Autenticación | JWT / Sessions para usuarios reales |
+| 6 | WebSockets | Chat streaming y typing indicators |
+| 7 | Evaluación de Respuestas | Métricas de calidad / feedback loop |
+| 8 | Deploy | Docker + Render / Railway / Vercel backend |
+| 9 | Observabilidad | Logs estructurados + métricas + tracing |
+| 10 | Multi-Modelo | Fallback a otros LLMs (ej. OpenAI / Cohere) |
 
-3. **Clase 3**: Inteligencia contextual
-   - Memoria conversacional
-   - Respuestas especializadas
-   - Sistema de filtros inteligente
+## 10. Solución de Problemas (FAQ)
+| Problema | Posible Causa | Solución |
+|----------|---------------|----------|
+| Error 500 en `/ask` | API Key inválida | Verifica `GEMINI_API_KEY` en `.env` |
+| No conecta a MongoDB | URI incorrecta o servicio caído | Revisa `MONGO_URI` y estado de MongoDB |
+| Respuesta vacía | Modelo sin output | Reintenta y verifica prompt o filtros |
+| Cambios no reflejados | Caché / proceso previo | Reinicia con Ctrl+C y `npm run dev` |
+| Filtros no aplican | Palabras no coinciden | Normaliza texto a minúsculas (ya implementado) |
 
-### Conceptos Técnicos Cubiertos
+## 11. Próximas Extensiones
+- Test unitarios (Jest + supertest)
+- Sanitización y rate limiting
+- Frontend con React / Next.js
+- Modo streaming de respuestas
+- Panel administrador de historial
+- Persistencia extendida (embeddings para memoria larga)
 
-- **APIs RESTful** con Express.js
-- **Integración con IA** usando Google Gemini
-- **Bases de datos NoSQL** con MongoDB
-- **Arquitectura MVC** en Node.js
-- **Manejo de variables de entorno**
-- **Gestión de errores** y validaciones
-- **Modularización** de código
-- **Persistencia de datos** con Mongoose
-- **Contexto conversacional** en chatbots
-- **Sistemas de filtros** y respuestas predefinidas
+## 12. Créditos
+Autor: Iván Martínez · CCOL
 
-## 🛠️ Tecnologías Utilizadas
-
-| Tecnología | Versión | Propósito |
-|------------|---------|-----------|
-| Node.js | Latest | Runtime de JavaScript |
-| Express | 5.1.0 | Framework web |
-| MongoDB | Latest | Base de datos NoSQL |
-| Mongoose | 8.18.0 | ODM para MongoDB |
-| Google Gemini | 2.5-flash | Modelo de IA |
-| @google/genai | ^1.16.0 | SDK oficial de Google |
-| Axios | 1.11.0 | Cliente HTTP |
-| dotenv | 17.2.1 | Variables de entorno |
-
-## 📁 Estructura de Archivos
-
-```
-ChatBot_IA/
-├── README.md
-├── .gitignore
-├── class_1/               # Fundamentos
-│   ├── chatbot.js
-│   ├── chatbot2.js
-│   ├── package.json
-│   └── .http
-├── class_2/               # Arquitectura y BD
-│   ├── chatbot.js
-│   ├── package.json
-│   ├── .http
-│   ├── config/
-│   │   └── db.js
-│   ├── controllers/
-│   │   └── chat_controller.js
-│   └── schemas/
-│       └── conversacion.js
-└── class_3/               # Sistema completo
-    ├── chatbot.js
-    ├── package.json
-    ├── .http
-    ├── config/
-    │   └── db.js
-    ├── controllers/
-    │   └── chat_controller.js
-    ├── schemas/
-    │   └── conversacion.js
-    └── utils/
-        └── filterquestions.js
-```
-
-## 🎓 Aprendizajes Clave
-
-### Para Estudiantes
-
-1. **Progresión gradual**: Cada clase construye sobre la anterior
-2. **Buenas prácticas**: Organización de código y manejo de errores
-3. **Tecnologías modernas**: Stack completo de desarrollo backend
-4. **IA práctica**: Implementación real con Gemini AI
-5. **Persistencia**: Manejo de bases de datos NoSQL
-
-### Para Instructores
-
-- Curso modular y escalable
-- Ejemplos prácticos en cada etapa
-- Conceptos teóricos aplicados
-- Ejercicios incrementales
-- Base sólida para expansión
-
-## 🔄 Próximos Pasos Sugeridos
-
-- **Frontend**: Interfaz web para el chatbot
-- **Autenticación**: Sistema de usuarios
-- **Deploy**: Implementación en la nube
-- **Testing**: Pruebas unitarias y de integración
-- **WebSockets**: Comunicación en tiempo real
-- **Múltiples modelos**: Integración con otros LLMs
-
-## 📞 Contacto
-
-**Autor**: Iván Martínez  
-**Institución**: CCOL  
-**Repositorio**: [ChatBot_IA](https://github.com/XxIvanstromxX/ChatBot_IA)
+> Proyecto educativo para formación en desarrollo de soluciones impulsadas por IA. Uso académico y extensible.
 
 ---
 
-> Este curso forma parte del programa de capacitación en tecnologías emergentes de CCOL, enfocado en el desarrollo de aplicaciones con inteligencia artificial.
+¿Quieres proponer una mejora? Abre un issue o envía un pull request. 🙌
+
